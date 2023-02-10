@@ -3,6 +3,7 @@ package com.cpan252.tekkenreborn.repository.impl;
 import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.cpan252.tekkenreborn.model.Fighter;
@@ -18,17 +19,28 @@ public class JdbcFighterRepository implements FighterRepository {
 
     @Override
     public Iterable<Fighter> findAll() {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM fighters", new FighterRowMapper());
     }
 
     @Override
     public Optional<Fighter> findById(Long id) {
-        return Optional.empty();
+        Fighter fighter = jdbcTemplate.queryForObject("SELECT * FROM fighter WHERE id = ?", new FighterRowMapper(), id);
+        return Optional.ofNullable(fighter);
     }
 
     @Override
-    public Fighter save(Fighter fighter) {
-        return null;
+    public void save(Fighter fighter) {
+        var insertFighter = "INSERT INTO fighters (name, damage_per_hit, health, resistance, anime_from, create_at) VALUES(?, ?, ?, ?, ?, ?)";
+        var keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            var ps = connection.prepareStatement(insertFighter);
+            ps.setString(1, fighter.getName());
+            ps.setInt(2, fighter.getDamagePerHit());
+            ps.setInt(3, fighter.getHealth());
+            ps.setBigDecimal(4, fighter.getResistance());
+            ps.setString(5, fighter.getAnimeFrom().name());
+            ps.setString(6, fighter.getCreatedAt().toString());
+            return ps;
+        }, keyHolder);
     }
-    
 }
