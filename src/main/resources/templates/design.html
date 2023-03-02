@@ -18,7 +18,7 @@
         >
             <h1 class="mb-3">Design Tekken Reborn Fighter</h1>
             <!-- We bind @ModelAttribute called fighter to this HTML form-->
-            <form method="post" th:object="${fighter}">
+            <form method="POST" th:object="${fighter}">
                 <div th:if="${#fields.hasErrors()}">
                     <span>
                         Please correct the problems below and resubmit.

@@ -27,6 +27,42 @@ public class TekkenrebornApplication {
 					.damagePerHit(88)
 					.health(1989)
 					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Mbappe")
+					.animeFrom(Anime.BLEACH)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Messi")
+					.animeFrom(Anime.NARUTO)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Halland")
+					.animeFrom(Anime.NARUTO)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Benzema")
+					.animeFrom(Anime.NARUTO)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Neymar")
+					.animeFrom(Anime.NARUTO)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
+			repository.save(Fighter.builder()
+					.name("Hakimi")
+					.animeFrom(Anime.NARUTO)
+					.damagePerHit(88)
+					.health(1989)
+					.resistance(new BigDecimal(8.7)).build());
 		};
 	}
 }
