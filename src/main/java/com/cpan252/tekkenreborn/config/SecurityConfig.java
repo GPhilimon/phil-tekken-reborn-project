@@ -4,6 +4,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,7 @@ import com.cpan252.tekkenreborn.model.User;
 import com.cpan252.tekkenreborn.repository.UserRepository;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 
    @Bean

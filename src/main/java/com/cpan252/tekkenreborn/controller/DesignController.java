@@ -3,20 +3,23 @@ package com.cpan252.tekkenreborn.controller;
 import java.util.EnumSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.model.Fighter.Anime;
+import com.cpan252.tekkenreborn.model.User;
 import com.cpan252.tekkenreborn.repository.FighterRepository;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
@@ -53,6 +56,16 @@ public class DesignController {
         fighterRepository.save(fighter);
 
         return "redirect:/design";
+
     }
+
+    @PostMapping("/deleteAllFighters")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String processFightersDeletion(@AuthenticationPrincipal User user) {
+        log.info("Deleting all fighters for user: {}", user.getAuthorities());
+        fighterRepository.deleteAll();
+        return "redirect:/design";
+    }
+
 
 }
