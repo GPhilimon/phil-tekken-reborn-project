@@ -37,23 +37,23 @@ public class SecurityConfig {
 
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      return http
-            .authorizeHttpRequests()
-            .requestMatchers(toH2Console()).permitAll()
-            .requestMatchers("/design", "/fighter_list")
-            .hasRole("USER")
-            .anyRequest().permitAll()
-            .and()
-            .formLogin(login -> login
-                  .loginPage("/login"))
-            .logout(logout -> logout
-                  .logoutSuccessUrl("/"))
-            .csrf(csrf -> csrf
-                  .ignoringRequestMatchers(toH2Console()))
-            .headers(headers -> headers
-                  .frameOptions()
-                  .sameOrigin())
-            .build();
+       http
+               .authorizeHttpRequests()
+               .requestMatchers(toH2Console()).permitAll()
+               .requestMatchers("/design", "/fighterlist")
+               .hasRole("USER")
+               .anyRequest().permitAll()
+               .and()
+               .formLogin(login -> login
+                       .loginPage("/login")
+                       .defaultSuccessUrl("/design", true))
+               .logout(logout -> logout
+                       .logoutSuccessUrl("/"))
+               .headers(headers -> headers
+                       .frameOptions());
+
+         http.csrf().disable();
+         return http.build();
    }
 
 }
