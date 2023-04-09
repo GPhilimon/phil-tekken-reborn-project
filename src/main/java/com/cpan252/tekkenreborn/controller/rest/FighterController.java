@@ -21,7 +21,6 @@ import com.cpan252.tekkenreborn.repository.FighterRepositoryPaginated;
 import jakarta.validation.Valid;
 
 @RestController
-// essentially the full path is http://localhost:8080/api/fighters
 @RequestMapping(path = "/api/fighters", produces = "application/json")
 public class FighterController {
 
